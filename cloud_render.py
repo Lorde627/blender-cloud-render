@@ -60,6 +60,12 @@ def cmd_setup(a):
                                                          'dataCenterId': DATACENTER})
         st['volume_id'] = v['id']
         print('network volume', v['id'])
+    if a.endpoint_id:  # endpoint deployed from GitHub in the RunPod console
+        st['endpoint_id'] = a.endpoint_id
+    if a.volume_only or 'endpoint_id' in st:
+        STATE.write_text(json.dumps(st, indent=2))
+        print('ready:', json.dumps(st))
+        return
     if 'template_id' not in st:
         body = {'name': f'blender-{uuid.uuid4().hex[:6]}', 'imageName': IMAGE, 'isServerless': True,
                 'containerDiskInGb': 20}
@@ -190,6 +196,8 @@ def main():
     s.add_argument('--volume-gb', type=int, default=20)
     s.add_argument('--max-workers', type=int, default=5)
     s.add_argument('--registry-auth', help='RunPod container registry auth id (private image)')
+    s.add_argument('--endpoint-id', help='use an endpoint created in the console (GitHub deploy)')
+    s.add_argument('--volume-only', action='store_true', help='only create the network volume')
     sub.add_parser('status')
     sub.add_parser('teardown')
     r = sub.add_parser('render')
