@@ -12,6 +12,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN curl -fsSL https://download.blender.org/release/Blender${BLENDER_VER%.*}/blender-${BLENDER_VER}-linux-x64.tar.xz \
       | tar -xJ -C /opt && ln -s /opt/blender-${BLENDER_VER}-linux-x64/blender /usr/local/bin/blender
 RUN pip3 install --no-cache-dir runpod==1.7.*
-COPY worker/handler.py worker/setup_render.py /app/
+COPY handler.py setup_render.py /app/
 WORKDIR /app
 CMD ["python3", "-u", "handler.py"]

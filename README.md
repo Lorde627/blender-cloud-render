@@ -2,7 +2,7 @@
 
 Render `.blend` files on RunPod Serverless GPUs with one command.
 
-- `Dockerfile` + `worker/`: the serverless worker image (Blender 5.1.2 Linux + RunPod handler).
+- `Dockerfile` + `handler.py` + `setup_render.py`: the serverless worker image (Blender 5.1.2 Linux + RunPod handler).
   RunPod builds it from this repo; a new GitHub **release** triggers a rebuild.
 - `cloud_render.py`: local client. Packs the .blend, uploads it to the network volume over
   the S3 API, fans frame chunks out to the endpoint, downloads the PNGs and cleans up.
