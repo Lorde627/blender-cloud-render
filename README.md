@@ -28,3 +28,5 @@ RUNPOD_S3_SECRET_KEY=...
 
 `--scene NAME[:samples=N,denoise=0|1,res=N]` may be repeated; `--chunk` sets frames per request
 (default 24). Endpoint/volume ids live in `state.json`.
+
+Entry point: `handler.py` calls `runpod.serverless.start()`.
